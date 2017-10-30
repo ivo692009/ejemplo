@@ -16,3 +16,6 @@ Route::get('/', function () {
 });
 
 Route::get('/inicio', 'inicioController@index'); 
+Route::get('/descriptores', 'descriptoresController@index');
+Route::get('/estados', 'estadoController@index');
+Route::get('/tipos', 'tiposController@index');
