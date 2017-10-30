@@ -1,0 +1,83 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+DROP SCHEMA IF EXISTS `database` ;
+CREATE SCHEMA IF NOT EXISTS `database` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `database` ;
+
+-- -----------------------------------------------------
+-- Table `database`.`estado`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `database`.`estado` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `database`.`tipo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `database`.`tipo` (
+  `id` INT NOT NULL,
+  `nombre` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `database`.`descriptores`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `database`.`descriptores` (
+  `id` INT NOT NULL,
+  `nombre` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `database`.`pieza`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `database`.`pieza` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `registro` INT NOT NULL,
+  `codigo` VARCHAR(45) NOT NULL,
+  `tipo_id` INT NULL,
+  `titulo` VARCHAR(45) NOT NULL,
+  `autor` VARCHAR(45) NULL,
+  `estilo` VARCHAR(45) NULL,
+  `material` VARCHAR(45) NULL,
+  `epoca` VARCHAR(45) NULL,
+  `fecha` VARCHAR(45) NULL,
+  `estado_id` INT NULL,
+  `procedencia` VARCHAR(100) NULL,
+  `ubicacion` VARCHAR(100) NULL,
+  `fotografo` VARCHAR(45) NULL,
+  `descripcion` VARCHAR(500) NULL,
+  `descriptores_id` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_pieza_estado_idx` (`estado_id` ASC),
+  INDEX `fk_pieza_tipo1_idx` (`tipo_id` ASC),
+  INDEX `fk_pieza_descriptores1_idx` (`descriptores_id` ASC),
+  CONSTRAINT `fk_pieza_estado`
+    FOREIGN KEY (`estado_id`)
+    REFERENCES `database`.`estado` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pieza_tipo1`
+    FOREIGN KEY (`tipo_id`)
+    REFERENCES `database`.`tipo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pieza_descriptores1`
+    FOREIGN KEY (`descriptores_id`)
+    REFERENCES `database`.`descriptores` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
