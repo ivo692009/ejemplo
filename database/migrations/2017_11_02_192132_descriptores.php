@@ -28,6 +28,6 @@ class Descriptores extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estados');
+        Schema::dropIfExists('descriptores');
     }
 }
