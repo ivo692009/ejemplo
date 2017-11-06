@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Descriptores;
 use Illuminate\Http\Request;
 
 class descriptoresController extends Controller
 {
     public function index () {
 
-        return view ('descriptores.index');
+        $descriptores = Descriptores::all();
+        return view ('descriptores.index',compact('descriptores'));
     }
 
+    
     public function create()
     {
-        //
+        return view ('descriptores.nuevo');
     }
 
     /**
@@ -24,7 +27,13 @@ class descriptoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nuevo = $request->validate([
+            'nombre' => 'required|min:3|max:200',
+        ]);
+
+        Descriptores::create($nuevo);
+
+        return redirect('descriptores');
     }
 
     /**
@@ -35,7 +44,9 @@ class descriptoresController extends Controller
      */
     public function show($id)
     {
-        //
+        $descriptores = Descriptores::findOrFail($id);
+        return view ('descriptores.modificar',compact('descriptores'));
+
     }
 
     /**

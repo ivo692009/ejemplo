@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Tipos;
 use Illuminate\Http\Request;
 
 class tiposController extends Controller
 {
     public function index () {
-        
+        $tipos = Tipos::all();
         return view ('tipos.index');
     }
     public function create()
     {
-        //
+        return view ('tipos.nuevo');
     }
 
     /**
@@ -23,7 +24,13 @@ class tiposController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nuevo = $request->validate([
+            'nombre' => 'required|min:3|max:200',
+        ]);
+
+        Tipos::create($nuevo);
+
+        return redirect('tipos');
     }
 
     /**
@@ -34,7 +41,9 @@ class tiposController extends Controller
      */
     public function show($id)
     {
-        //
+        $tipos = Tipos::findOrFail($id);
+        return view ('tipos.modificar',compact('tipos'));
+
     }
 
     /**

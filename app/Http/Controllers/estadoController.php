@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Estados;
 use Illuminate\Http\Request;
 
 class estadoController extends Controller
 {
     public function index () {
-        
+        $estados = Estados::all();
         return view ('estados.index');
     }
 
     public function create()
     {
-        //
+        return view ('estados.nuevo');
     }
 
     /**
@@ -24,7 +25,13 @@ class estadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nuevo = $request->validate([
+            'nombre' => 'required|min:3|max:200',
+        ]);
+
+        Estados::create($nuevo);
+
+        return redirect('estados');
     }
 
     /**
@@ -35,7 +42,9 @@ class estadoController extends Controller
      */
     public function show($id)
     {
-        //
+        $estados = Estados::findOrFail($id);
+        return view ('estados.modificar',compact('deestados'));
+
     }
 
     /**
