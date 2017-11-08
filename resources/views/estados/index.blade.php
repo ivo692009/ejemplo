@@ -4,7 +4,7 @@
     <p>Por aca pasa a estados</p>
 
     <a href="/estados/nuevo" target="_self"> <input type="button" name="boton" value="Nuevo Estado" /> </a> 
-
+    <br><br>
     
         @foreach ($estados as $d)
         <tr>

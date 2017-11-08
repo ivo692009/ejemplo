@@ -4,7 +4,7 @@
     <p>Por aca pasa a Tipos</p>
 
     <a href="/tipos/nuevo" target="_self"> <input type="button" name="boton" value="Nuevo Tipo" /> </a> 
-
+    <br><br>
     
         @foreach ($tipos as $d)
         <tr>
