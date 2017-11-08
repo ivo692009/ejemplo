@@ -28,7 +28,7 @@ class descriptoresController extends Controller
     public function store(Request $request)
     {
         $nuevo = $request->validate([
-            'nombre' => 'required|min:3|max:200',
+            'nombre' => 'required|unique:descriptores|min:3|max:200',
         ]);
 
         Descriptores::create($nuevo);

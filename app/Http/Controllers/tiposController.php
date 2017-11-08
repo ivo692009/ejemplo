@@ -25,7 +25,7 @@ class tiposController extends Controller
     public function store(Request $request)
     {
         $nuevo = $request->validate([
-            'nombre' => 'required|min:3|max:200',
+            'nombre' => 'required|unique:tipos|min:3|max:200',
         ]);
 
         Tipos::create($nuevo);
