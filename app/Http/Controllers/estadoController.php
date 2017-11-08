@@ -9,7 +9,7 @@ class estadoController extends Controller
 {
     public function index () {
         $estados = Estados::all();
-        return view ('estados.index');
+        return view ('estados.index',compact('estados'));
     }
 
     public function create()
