@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Estados;
 use Illuminate\Http\Request;
 
@@ -79,7 +80,9 @@ class estadoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('estados')->where('id', '=', $id)->delete();
+
+        return redirect ('/estados');
     }
 
 }

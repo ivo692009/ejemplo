@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Descriptores;
 use Illuminate\Http\Request;
 
@@ -80,6 +81,8 @@ class descriptoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('descriptores')->where('id', '=', $id)->delete();
+        
+        return redirect ('/descriptores');
     }
 }

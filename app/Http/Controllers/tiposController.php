@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Tipos;
 use Illuminate\Http\Request;
 
@@ -77,6 +78,8 @@ class tiposController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('tipos')->where('id', '=', $id)->delete();
+        
+        return redirect ('/tipos');
     }
 }
