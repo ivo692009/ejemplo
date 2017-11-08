@@ -7,11 +7,11 @@
 
     
         @foreach ($descriptores as $d)
-        <ul>
-            <li> {{ $d->nombre }} </li>
-            <li> <a href="/descriptores/modificar/{{ $d->id }}" target="_self"> <input type="button" name="boton" value="Modificar" /> </a></li>
-            <li> <a href="/descriptores/eliminar/{{ $d->id }}" target="_self"> <input type="button" name="boton" value="Eliminar" /> </a></li>
-        </ul>
+        <tr>
+            <th> {{ $d->nombre }} </th>
+            <th> <a href="/descriptores/modificar/{{ $d->id }}" target="_self"> <input type="button" name="boton" value="Modificar" /> </a></th>
+            <th> <a href="/descriptores/eliminar/{{ $d->id }}" target="_self"> <input type="button" name="boton" value="Eliminar" /> </a></th>
+        </tr>
         @endforeach
 
     @endsection

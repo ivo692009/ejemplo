@@ -12,9 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
+//Los index
 Route::get('/inicio', 'inicioController@index'); 
 Route::get('/descriptores', 'descriptoresController@index');
 Route::get('/estados', 'estadoController@index');
@@ -23,7 +24,7 @@ Route::get('/tipos', 'tiposController@index');
 //Metodos para los 3 abms
 //descriptores
 Route::get('/descriptores/nuevo', 'descriptoresController@create');
-Route::get('/descriptores/modificar/{id}','descriptoresController@show')->name('/Modificar');
+Route::get('/descriptores/modificar/{id}','descriptoresController@show')->name('/Modificando');
 Route::post('/descriptores/modificado','descriptoresController@update');
 Route::get('/descriptores/eliminar/{id}','descriptoresController@destroy');
 Route::post('/descriptores/crear','descriptoresController@store');
