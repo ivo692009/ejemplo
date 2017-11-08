@@ -46,7 +46,7 @@ class descriptoresController extends Controller
     public function show($id)
     {
         $descriptores = Descriptores::findOrFail($id);
-        return view ('descriptores.modificar',compact('descriptores'));
+        return view ('descriptores.modificar',compact('descriptores','id'));
 
     }
 
@@ -70,7 +70,15 @@ class descriptoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $nuevo = $request->validate([
+            'nombre' => 'required|unique:descriptores|min:3|max:200',
+        ]);
+
+        DB::table('descriptores')
+            ->where('id', $request->id)
+            ->update(['nombre' => $request->nombre]);
+
+        return redirect ('/descriptores');
     }
 
     /**

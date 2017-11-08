@@ -43,7 +43,7 @@ class tiposController extends Controller
     public function show($id)
     {
         $tipos = Tipos::findOrFail($id);
-        return view ('tipos.modificar',compact('tipos'));
+        return view ('tipos.modificar',compact('tipos','id'));
 
     }
 
@@ -65,9 +65,17 @@ class tiposController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $nuevo = $request->validate([
+            'nombre' => 'required|unique:tipos|min:3|max:200',
+        ]);
+
+        DB::table('tipos')
+            ->where('id', $request->id)
+            ->update(['nombre' => $request->nombre]);
+
+        return redirect ('/tipos');
     }
 
     /**

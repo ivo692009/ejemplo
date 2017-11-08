@@ -24,11 +24,13 @@ Route::get('/tipos', 'tiposController@index');
 //descriptores
 Route::get('/descriptores/nuevo', 'descriptoresController@create');
 Route::get('/descriptores/modificar/{id}','descriptoresController@show');
+Route::post('/descriptores/modificado','descriptoresController@update');
 Route::get('/descriptores/eliminar/{id}','descriptoresController@destroy');
 Route::post('/descriptores/crear','descriptoresController@store');
 //tipos
 Route::get('/tipos/nuevo', 'tiposController@create');
 Route::get('/tipos/modificar/{id}','tiposController@show');
+Route::post('/tipos/modificado','tiposController@update');
 Route::get('/tipos/eliminar/{id}','tiposController@destroy');
 Route::post('/tipos/crear','tiposController@store');
 //estados
