@@ -26,8 +26,9 @@ class estadoController extends Controller
     public function store(Request $request)
     {
         $nuevo = $request->validate([
-            'nombre' => 'required|min:3|max:200',
+            'nombre' => 'required|unique:estados|min:3|max:200',
         ]);
+
 
         Estados::create($nuevo);
 

@@ -9,4 +9,6 @@ class Estados extends Model
     protected $fillable = [
         'nombre'
     ];
+
+    
 }
