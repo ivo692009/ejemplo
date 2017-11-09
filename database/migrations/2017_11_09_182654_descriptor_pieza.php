@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Descriptores extends Migration
+class DescriptorPieza extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class Descriptores extends Migration
      */
     public function up()
     {
-        Schema::create('descriptores', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nombre');
+        Schema::create('descriptor_pieza', function (Blueprint $table) {
+            $table->integer('descriptor_id');
+            $table->integer('pieza_id');
         });
     }
 
@@ -26,6 +26,6 @@ class Descriptores extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('descriptores');
+        Schema::dropIfExists('descriptor_pieza');
     }
 }
