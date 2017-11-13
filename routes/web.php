@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('index');
 });
@@ -20,6 +9,7 @@ Route::get('/inicio', 'inicioController@index');
 Route::get('/descriptores', 'descriptoresController@index');
 Route::get('/estados', 'estadoController@index');
 Route::get('/tipos', 'tiposController@index');
+Route::get('/piezas', 'piezasController@index');
 
 //Metodos para los 3 abms
 //descriptores
@@ -40,3 +30,11 @@ Route::get('/estados/modificar/{id}','estadoController@show');
 Route::post('/estados/modificado','estadoController@update');
 Route::get('/estados/eliminar/{id}','estadoController@destroy');
 Route::post('/estados/crear','estadoController@store');
+
+//Las piezas
+Route::get('/piezas/nuevo', 'piezasController@create');
+Route::get('/piezas/ver/{id}', 'piezasController@ver');
+Route::get('/piezas/modificar/{id}','piezasController@show');
+Route::post('/piezas/modificado','piezasController@update');
+Route::get('/piezas/eliminar/{id}','piezasController@destroy');
+Route::post('/piezas/crear','piezasController@store');
