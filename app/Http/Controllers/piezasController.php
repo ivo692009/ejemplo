@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Piezas;
+use App\Descriptores;
+use App\Estados;
+use App\Tipos;
 
 class piezasController extends Controller
 {
@@ -12,16 +15,22 @@ class piezasController extends Controller
         $piezas = Piezas::all();
         return view ('piezas.index',compact('piezas'));
     }
-    
+
     public function create()
     {
-        return view ('piezas.nuevo');
+        $estados      = Estados::all();
+        $descriptores = Descriptores::all();
+        $tipos        = Tipos::all();
+        return view ('piezas.nuevo',compact('estados','tipos','descriptores'));
     }
 
     public function ver($id){
 
+        $estados      = Estados::all();
+        $descriptores = Descriptores::all();
+        $tipos        = Tipos::all();
         $piezas = Piezas::findOrFail($id);
-        return view ('piezas.ver',compact('piezas'));
+        return view ('piezas.ver',compact('piezas','estados','tipos','descriptores'));
 
     }
     /**
@@ -63,8 +72,11 @@ class piezasController extends Controller
      */
     public function show($id)
     {
+        $estados      = Estados::all();
+        $descriptores = Descriptores::all();
+        $tipos        = Tipos::all();
         $piezas = Piezas::findOrFail($id);
-        return view ('piezas.modificar',compact('piezas','id'));
+        return view ('piezas.modificar',compact('piezas','id','estados','tipos','descriptores'));
 
     }
 
