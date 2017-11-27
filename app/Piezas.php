@@ -22,7 +22,12 @@ class Piezas extends Model
         'fotografo',
         'descripcion',
         'observaciones',
-        'descriptores_id',
+        'descriptores_id_1',
+        'descriptores_id_2',
+        'descriptores_id_3',
+        'descriptores_id_4',
+        'descriptores_id_5',
+        'descriptores_id_6',
         'foto'
     ];
 }

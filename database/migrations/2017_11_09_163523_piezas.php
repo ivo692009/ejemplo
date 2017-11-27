@@ -30,7 +30,12 @@ class Piezas extends Migration
             $table->text('fotografo');
             $table->text('descripcion');
             $table->text('observaciones');
-            $table->integer('descriptores_id');
+            $table->integer('descriptores_id_1');
+            $table->integer('descriptores_id_2')->nullable();
+            $table->integer('descriptores_id_3')->nullable();
+            $table->integer('descriptores_id_4')->nullable();
+            $table->integer('descriptores_id_5')->nullable();
+            $table->integer('descriptores_id_6')->nullable();
             $table->text('foto')->nullable();
             $table->timestamps();
         });

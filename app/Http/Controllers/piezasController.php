@@ -28,10 +28,16 @@ class piezasController extends Controller
 
         $piezas       = Piezas::findOrFail($id);
         $estados      = Estados::findOrFail($piezas->estado_id);
-        $descriptores = Descriptores::findOrFail($piezas->descriptores_id);
         $tipos        = Tipos::findOrFail($piezas->tipo_id);
+        $d1           = Descriptores::find($piezas->descriptores_id_1);
+        $d2           = Descriptores::find($piezas->descriptores_id_2);
+        $d3           = Descriptores::find($piezas->descriptores_id_3);
+        $d4           = Descriptores::find($piezas->descriptores_id_4);
+        $d5           = Descriptores::find($piezas->descriptores_id_5);
+        $d6           = Descriptores::find($piezas->descriptores_id_6);
+        
 
-        return view ('piezas.ver',compact('piezas','estados','tipos','descriptores'));
+        return view ('piezas.ver',compact('piezas','estados','tipos','d1','d2','d3','d4','d5','d6'));
 
     }
     /**
@@ -42,23 +48,30 @@ class piezasController extends Controller
      */
     public function store(Request $request)
     {
+      // dd($request);
         $nuevo = $request->validate([
-            'registro'          => 'required|unique:piezas',
-            'tipo_id'           => 'required',
-            'titulo'            => 'required|min:3|max:200',
-            'autor'             => 'required|min:3|max:200',
-            'estilo'            => 'required|min:3|max:200',
-            'material'          => 'required|min:3|max:200',
-            'epoca'             => 'required|min:3|max:200',
-            'fecha'             => 'required',
-            'estado_id'         => 'required',
-            'procedencia'       => 'required|min:3|max:200',
-            'ubicacion'         => 'required|min:3|max:200',
-            'foto'              => 'image',
-            'fotografo'         => 'required|min:3|max:200',
-            'descripcion'       => 'min:3|max:240',
-            'observaciones'     => 'min:3|max:200',
-            'descriptores_id'   =>'required',
+            'registro'              => 'required|unique:piezas',
+            'tipo_id'               => 'required',
+            'titulo'                => 'required|min:3|max:200',
+            'autor'                 => 'required|min:3|max:200',
+            'estilo'                => 'required|min:3|max:200',
+            'material'              => 'required|min:3|max:200',
+            'epoca'                 => 'required|min:3|max:200',
+            'fecha'                 => 'required',
+            'estado_id'             => 'required',
+            'procedencia'           => 'required|min:3|max:200',
+            'ubicacion'             => 'required|min:3|max:200',
+            'foto'                  => 'image',
+            'fotografo'             => 'required|min:3|max:200',
+            'descripcion'           => 'min:3|max:240',
+            'observaciones'         => 'min:3|max:200',
+            'descriptores_id_1'     => 'required',
+            'descriptores_id_2'     => 'different:descriptores_id_1|nullable',
+            'descriptores_id_3'     => 'different:descriptores_id_1|different:descriptores_id_2|nullable',
+            'descriptores_id_4'     => 'different:descriptores_id_1|different:descriptores_id_2|different:descriptores_id_3|nullable',
+            'descriptores_id_5'     => 'different:descriptores_id_1|different:descriptores_id_2|different:descriptores_id_3|different:descriptores_id_4|nullable',
+            'descriptores_id_6'     => 'different:descriptores_id_1|different:descriptores_id_2|different:descriptores_id_3|different:descriptores_id_4|different:descriptores_id_5|nullable',
+            
         ]);
 
         $nuevo['foto'] = $request->file('foto')->store('public');
@@ -113,8 +126,13 @@ class piezasController extends Controller
             'fotografo'         => 'required|min:3|max:200',
             'descripcion'       => 'min:3|max:240',
             'observaciones'     => 'min:3|max:200',
-            'descriptores_id'   =>'required',
-        ]);
+            'descriptores_id_1'     => 'required',
+            'descriptores_id_2'     => 'different:descriptores_id_1|nullable',
+            'descriptores_id_3'     => 'different:descriptores_id_1|different:descriptores_id_2|nullable',
+            'descriptores_id_4'     => 'different:descriptores_id_1|different:descriptores_id_2|different:descriptores_id_3|nullable',
+            'descriptores_id_5'     => 'different:descriptores_id_1|different:descriptores_id_2|different:descriptores_id_3|different:descriptores_id_4|nullable',
+            'descriptores_id_6'     => 'different:descriptores_id_1|different:descriptores_id_2|different:descriptores_id_3|different:descriptores_id_4|different:descriptores_id_5|nullable',
+            ]);
 
         
         $nuevo->registro    = $request->registro;
@@ -138,7 +156,12 @@ class piezasController extends Controller
         $nuevo->fotografo   = $request->fotografo;
         $nuevo->descripcion = $request->descripcion;
         $nuevo->observaciones = $request->observaciones;
-        $nuevo->descriptores_id = $request->descriptores_id;
+        $nuevo->descriptores_id_1 = $request->descriptores_id_1;
+        $nuevo->descriptores_id_2 = $request->descriptores_id_2;
+        $nuevo->descriptores_id_3 = $request->descriptores_id_3;
+        $nuevo->descriptores_id_4 = $request->descriptores_id_4;
+        $nuevo->descriptores_id_5 = $request->descriptores_id_5;
+        $nuevo->descriptores_id_6 = $request->descriptores_id_6;
 
         $nuevo->save(); 
 

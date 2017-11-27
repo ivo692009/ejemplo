@@ -29,8 +29,10 @@ class descriptoresController extends Controller
     public function store(Request $request)
     {
         $nuevo = $request->validate([
-            'nombre' => 'required|unique:descriptores|min:3|max:200',
+            'nombre' => 'required|unique:descriptores|regex:/^[a-zA-Z]+$/u|min:3|max:200',
         ]);
+
+        $nuevo['nombre']=strtoupper($nuevo['nombre']);
 
         Descriptores::create($nuevo);
 
@@ -64,10 +66,10 @@ class descriptoresController extends Controller
         $nuevo = Descriptores::find($request->id);
 
         $valido = $request->validate([
-            'nombre' => 'required|unique:descriptores|min:3|max:200',
+            'nombre' => 'required|unique:descriptores|regex:/^[a-zA-Z]+$/u|min:3|max:200',
         ]);
 
-        $nuevo->nombre = $request->nombre;
+        $nuevo->nombre =strtoupper($request->nombre);
         $nuevo->save(); 
 
         // DB::table('descriptores')

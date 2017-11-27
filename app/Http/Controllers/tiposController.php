@@ -26,8 +26,10 @@ class tiposController extends Controller
     public function store(Request $request)
     {
         $nuevo = $request->validate([
-            'nombre' => 'required|unique:tipos|min:3|max:200',
+            'nombre' => 'required|unique:tipos|regex:/^[a-zA-Z]+$/u|min:3|max:200',
         ]);
+
+        $nuevo['nombre']=strtoupper($nuevo['nombre']);
 
         Tipos::create($nuevo);
 
@@ -61,10 +63,11 @@ class tiposController extends Controller
         $nuevo = Tipos::find($request->id);
 
         $valido = $request->validate([
-            'nombre' => 'required|unique:tipos|min:3|max:200',
+            'nombre' => 'required|unique:tipos|regex:/^[a-zA-Z]+$/u|min:3|max:200',
         ]);
 
-        $nuevo->nombre = $request->nombre;
+        $nuevo->nombre =strtoupper($request->nombre);
+        //$nuevo->nombre = $request->nombre;
 
         //DB::table('tipos')
         //    ->where('id', $request->id)

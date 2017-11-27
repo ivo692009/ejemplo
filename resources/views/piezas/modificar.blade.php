@@ -18,7 +18,7 @@
     {{ csrf_field() }}
 
         <input type="hidden" name="id" id="id" value="{{ $id }}" />
-        <p>Numero de registro</p> 
+        <p>Numero de registro (anterior {{ $piezas->registro }})</p> 
         <input type="text" name="registro" id="registro" required/> <br>
         <p>Titulo</p> 
         <input type="text" name="titulo" id="titulo"  value="{{ $piezas->titulo }}" required/> <br>
@@ -58,11 +58,42 @@
         <p>Observaciones de la pieza</p> 
         <input type="text" name="observaciones" id="observaciones"  value="{{ $piezas->observaciones }}" /> <br>
         <p>Descriptores</p>
-        <select name="descriptores_id" id="descriptores_id" multiple>
+        <select name="descriptores_id_1" id="descriptores_id_1">
+            <option > </option>
             @foreach ($descriptores as $d)
-            <option value="{{ $d->id }}">{{ $d->nombre }}</option>
+                <option value="{{ $d->id }}">{{ $d->nombre }}</option>
             @endforeach
-        </select>
+        </select> <br>
+        <select name="descriptores_id_2" id="descriptores_id_2">
+            <option > </option>
+            @foreach ($descriptores as $d)
+                <option value="{{ $d->id }}">{{ $d->nombre }}</option>
+            @endforeach
+        </select><br>
+        <select name="descriptores_id_3" id="descriptores_id_3">
+        <option > </option>
+            @foreach ($descriptores as $d)
+                <option value="{{ $d->id }}">{{ $d->nombre }}</option>
+            @endforeach
+        </select><br>
+        <select name="descriptores_id_4" id="descriptores_id_4">
+        <option> </option>
+            @foreach ($descriptores as $d)
+                <option value="{{ $d->id }}">{{ $d->nombre }}</option>
+            @endforeach
+        </select><br>
+        <select name="descriptores_id_5" id="descriptores_id_5">
+            <option ></option>
+            @foreach ($descriptores as $d)
+                <option value="{{ $d->id }}">{{ $d->nombre }}</option>
+            @endforeach
+        </select><br>
+        <select name="descriptores_id_6" id="descriptores_id_6">
+             <option> </option>
+            @foreach ($descriptores as $d)
+                <option value="{{ $d->id }}">{{ $d->nombre }}</option>
+            @endforeach
+        </select><br>
     <input type="submit" value="Submit">
     </form>
     @endsection

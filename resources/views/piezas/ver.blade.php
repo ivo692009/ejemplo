@@ -20,6 +20,21 @@
         <p>Nombre del Fotografo: <b>{{ $piezas->fotografo }}</b></p> 
         <p>Descripcion de la pieza: <b>{{ $piezas->descripcion }}</b></p> 
         <p>Observaciones de la pieza: <b>{{ $piezas->observaciones }}</b></p> 
-        <p>Descriptores: <b>{{ $descriptores->nombre }}</b></p>
-
+        <p>Descriptores:</p>
+        <p>Descritor 1: <b>{{ $d1->nombre }}</b></p>
+        @if($d2)
+        <p>Descritor 2: <b>{{ $d2->nombre }}</b></p> 
+        @endif
+        @if($d3)
+        <p>Descritor 3: <b>{{ $d3->nombre }}</b></p> 
+        @endif
+        @if($d4)
+        <p>Descritor 4: <b>{{ $d4->nombre }}</b></p> 
+        @endif
+        @if($d5)
+        <p>Descritor 5: <b>{{ $d5->nombre }}</b></p> 
+        @endif
+        @if($d6)
+        <p>Descritor 6: <b>{{ $d6->nombre }}</b></p> 
+        @endif
     @endsection
