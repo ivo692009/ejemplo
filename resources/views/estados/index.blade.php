@@ -5,7 +5,7 @@
 
     <a href="/estados/nuevo" target="_self"> <input type="button" name="boton" value="Nuevo Estado" /> </a> 
     <br><br>
-    
+        <table>
         @foreach ($estados as $d)
         <tr>
             <th> {{ $d->nombre }} </th>
@@ -13,5 +13,5 @@
             <th> <a href="/estados/eliminar/{{ $d->id }}" target="_self"> <input type="button" name="boton" value="Eliminar" /> </a></th>
         </tr>
         @endforeach
-
+        </table>
     @endsection
