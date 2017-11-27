@@ -8,6 +8,7 @@ class Piezas extends Model
 {
     protected $fillable = [
         'registro',
+        'codigo',
         'tipo_id',
         'titulo',
         'autor',
@@ -21,7 +22,7 @@ class Piezas extends Model
         'fotografo',
         'descripcion',
         'observaciones',
-        'descriptores_id'
-        //'foto'
+        'descriptores_id',
+        'foto'
     ];
 }

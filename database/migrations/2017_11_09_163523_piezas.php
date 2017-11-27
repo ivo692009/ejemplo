@@ -16,7 +16,7 @@ class Piezas extends Migration
         Schema::create('piezas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('registro');
-            $table->text('codigo');
+            $table->text('codigo')->nullable();
             $table->integer('tipo_id');
             $table->text('titulo');
             $table->text('autor');
@@ -31,7 +31,8 @@ class Piezas extends Migration
             $table->text('descripcion');
             $table->text('observaciones');
             $table->integer('descriptores_id');
-            $table->text('foto');
+            $table->text('foto')->nullable();
+            $table->timestamps();
         });
     }
 

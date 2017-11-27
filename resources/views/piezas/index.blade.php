@@ -8,7 +8,7 @@
     
         @foreach ($piezas as $d)
         <tr>
-            <th> {{ $d->nombre }} </th>
+            <th> {{ $d->titulo }} </th>
             <th> <a href="/piezas/ver/{{ $d->id }}" target="_self"> <input type="button" name="boton" value="Ver" /> </a></th>
             <th> <a href="/piezas/modificar/{{ $d->id }}" target="_self"> <input type="button" name="boton" value="Modificar" /> </a></th>
             <th> <a href="/piezas/eliminar/{{ $d->id }}" target="_self"> <input type="button" name="boton" value="Eliminar" /> </a></th>

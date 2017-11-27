@@ -13,7 +13,7 @@
     </div>
     @endif
     
-    <form method="post" action="/tipos/modificado">
+    <form method="post" action="/piezas/modificado">
     
     {{ csrf_field() }}
 

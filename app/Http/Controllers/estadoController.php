@@ -45,7 +45,7 @@ class estadoController extends Controller
     public function show($id)
     {
         $estados = Estados::findOrFail($id);
-        return view ('estados.modificar',compact('deestados','id'));
+        return view ('estados.modificar',compact('estados','id'));
 
     }
 
@@ -56,15 +56,19 @@ class estadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $nuevo = $request->validate([
+        $nuevo = Estados::find($request->id);
+
+        $valido = $request->validate([
             'nombre' => 'required|unique:estados|min:3|max:200',
         ]);
 
-        DB::table('estados')
-            ->where('id', $request->id)
-            ->update(['nombre' => $request->nombre]);
+        $nuevo->nombre = $request->nombre;
+        $nuevo->save();
+        // DB::table('estados')
+        //     ->where('id', $request->id)
+        //     ->update(['nombre' => $request->nombre]);
 
         return redirect ('/estados');
     }

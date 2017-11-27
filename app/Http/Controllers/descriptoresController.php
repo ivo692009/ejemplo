@@ -58,15 +58,21 @@ class descriptoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $nuevo = $request->validate([
+
+        $nuevo = Descriptores::find($request->id);
+
+        $valido = $request->validate([
             'nombre' => 'required|unique:descriptores|min:3|max:200',
         ]);
 
-        DB::table('descriptores')
-            ->where('id', $request->id)
-            ->update(['nombre' => $request->nombre]);
+        $nuevo->nombre = $request->nombre;
+        $nuevo->save(); 
+
+        // DB::table('descriptores')
+        //     ->where('id', $request->id)
+        //     ->update(['nombre' => $request->nombre]);
 
         return redirect ('/descriptores');
     }

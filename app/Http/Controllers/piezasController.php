@@ -26,10 +26,11 @@ class piezasController extends Controller
 
     public function ver($id){
 
-        $estados      = Estados::all();
-        $descriptores = Descriptores::all();
-        $tipos        = Tipos::all();
-        $piezas = Piezas::findOrFail($id);
+        $piezas       = Piezas::findOrFail($id);
+        $estados      = Estados::findOrFail($piezas->estado_id);
+        $descriptores = Descriptores::findOrFail($piezas->descriptores_id);
+        $tipos        = Tipos::findOrFail($piezas->tipo_id);
+
         return view ('piezas.ver',compact('piezas','estados','tipos','descriptores'));
 
     }
@@ -42,7 +43,7 @@ class piezasController extends Controller
     public function store(Request $request)
     {
         $nuevo = $request->validate([
-            'registro'          => 'required|unique:piezas|min:3|max:200',
+            'registro'          => 'required|unique:piezas',
             'tipo_id'           => 'required',
             'titulo'            => 'required|min:3|max:200',
             'autor'             => 'required|min:3|max:200',
@@ -53,12 +54,15 @@ class piezasController extends Controller
             'estado_id'         => 'required',
             'procedencia'       => 'required|min:3|max:200',
             'ubicacion'         => 'required|min:3|max:200',
+            'foto'              => 'image',
             'fotografo'         => 'required|min:3|max:200',
             'descripcion'       => 'min:3|max:240',
             'observaciones'     => 'min:3|max:200',
             'descriptores_id'   =>'required',
         ]);
 
+        $nuevo['foto'] = $request->file('foto')->store('public');
+        $nuevo['codigo']= "MSDB-".$request->registro;
         Piezas::create($nuevo);
 
         return redirect('piezas');
@@ -71,11 +75,12 @@ class piezasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        $estados      = Estados::all();
+    {   
+        $piezas       = Piezas::findOrFail($id);
+        $estados      = Estados::find();
         $descriptores = Descriptores::all();
         $tipos        = Tipos::all();
-        $piezas = Piezas::findOrFail($id);
+        
         return view ('piezas.modificar',compact('piezas','id','estados','tipos','descriptores'));
 
     }
@@ -91,8 +96,10 @@ class piezasController extends Controller
      */
     public function update(Request $request)
     {
+        $nuevo = Piezas::find($request->id);
+        
         $nuevo = $request->validate([
-            'registro'          => 'required|unique:piezas|min:3|max:200',
+            'registro'          => 'required|unique:piezas',
             'tipo_id'           => 'required',
             'titulo'            => 'required|min:3|max:200',
             'autor'             => 'required|min:3|max:200',
@@ -102,6 +109,7 @@ class piezasController extends Controller
             'fecha'             => 'required',
             'estado_id'         => 'required',
             'procedencia'       => 'required|min:3|max:200',
+            'foto'              => 'image',
             'ubicacion'         => 'required|min:3|max:200',
             'fotografo'         => 'required|min:3|max:200',
             'descripcion'       => 'min:3|max:240',
@@ -109,23 +117,53 @@ class piezasController extends Controller
             'descriptores_id'   =>'required',
         ]);
 
-        DB::table('piezas')
-            ->where('id', $request->id)
-            ->update(['registro'  => $request->registro,
-            'tipo_id'             => $request->tipo_id,
-            'titulo'              => $request->titulo,
-            'autor'               => $request->autor,
-            'estilo'              => $request->estilo,
-            'material'            => $request->materia,
-            'epoca'               => $request->epoca,
-            'fecha'               => $request->fecha,
-            'estado_id'           => $request->estado_id,
-            'procedencia'         => $request->procedencia,
-            'ubicacion'           => $request->ubicacion,
-            'fotografo'           => $request->fotografo,
-            'descripcion'         => $request->descripcion,
-            'observaciones'       => $request->observaciones,
-            'descriptores_id'     => $request->descriptores_id]);
+        
+        $nuevo->registro    = $request->registro;
+        $nuevo->codigo      = "MSDB-".$request->registro;
+        $nuevo->tipo_id     = $request->tipo_id;
+        $nuevo->titulo      = $request->titulo;
+        $nuevo->autor       = $request->autor;
+        $nuevo->estilo      = $request->estilo;
+        $nuevo->material    = $request->material;
+        $nuevo->epoca       = $request->epoca;
+        $nuevo->fecha       = $request->fecha;
+        $nuevo->estado_id   = $request->estado_id;
+        $nuevo->procedencia = $request->procedencia;
+        $nuevo->ubicacion   = $request->ubicacion;
+
+        if($request ->hasFile('foto'))
+        {
+            $nuevo->foto = $request->file('foto')->store('public');
+        }
+
+        $nuevo->fotografo   = $request->fotografo;
+        $nuevo->descripcion = $request->descripcion;
+        $nuevo->observaciones = $request->observaciones;
+        $nuevo->descriptores_id = $request->descriptores_id;
+
+        $nuevo->save(); 
+
+        // DB::table('piezas')
+        //     ->where('id', $request->id)
+        //     ->update(['registro'  => $request->registro,
+        //     'tipo_id'             => $request->tipo_id,
+        //     'titulo'              => $request->titulo,
+        //     'autor'               => $request->autor,
+        //     'estilo'              => $request->estilo,
+        //     'material'            => $request->materia,
+        //     'epoca'               => $request->epoca,
+        //     'fecha'               => $request->fecha,
+        //     'estado_id'           => $request->estado_id,
+        //     'procedencia'         => $request->procedencia,
+        //     'ubicacion'           => $request->ubicacion,
+        //     'fotografo'           => $request->fotografo,
+        //     'descripcion'         => $request->descripcion,
+        //     'observaciones'       => $request->observaciones,
+        //     'descriptores_id'     => $request->descriptores_id]);
+            
+            
+    
+
 
         return redirect ('/piezas');
     }

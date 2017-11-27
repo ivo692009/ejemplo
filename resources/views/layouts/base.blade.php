@@ -22,6 +22,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/inicio">El Museo</a>
         </div>
@@ -30,6 +31,7 @@
             <li><a href="/descriptores">Descriptores</a></li>
             <li><a href="/estados">Estados</a></li>
             <li><a href="/tipos">Tipos</a></li>
+            <li><a href="/piezas">Piezas</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

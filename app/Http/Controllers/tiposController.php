@@ -58,13 +58,19 @@ class tiposController extends Controller
      */
     public function update(Request $request)
     {
-        $nuevo = $request->validate([
+        $nuevo = Tipos::find($request->id);
+
+        $valido = $request->validate([
             'nombre' => 'required|unique:tipos|min:3|max:200',
         ]);
 
-        DB::table('tipos')
-            ->where('id', $request->id)
-            ->update(['nombre' => $request->nombre]);
+        $nuevo->nombre = $request->nombre;
+
+        //DB::table('tipos')
+        //    ->where('id', $request->id)
+        //    ->update(['nombre' => $request->nombre]);
+
+        $nuevo->save();
 
         return redirect ('/tipos');
     }
