@@ -77,7 +77,7 @@ class piezasController extends Controller
     public function show($id)
     {   
         $piezas       = Piezas::findOrFail($id);
-        $estados      = Estados::find();
+        $estados      = Estados::all();
         $descriptores = Descriptores::all();
         $tipos        = Tipos::all();
         
@@ -98,7 +98,7 @@ class piezasController extends Controller
     {
         $nuevo = Piezas::find($request->id);
         
-        $nuevo = $request->validate([
+        $valido = $request->validate([
             'registro'          => 'required|unique:piezas',
             'tipo_id'           => 'required',
             'titulo'            => 'required|min:3|max:200',
@@ -109,7 +109,6 @@ class piezasController extends Controller
             'fecha'             => 'required',
             'estado_id'         => 'required',
             'procedencia'       => 'required|min:3|max:200',
-            'foto'              => 'image',
             'ubicacion'         => 'required|min:3|max:200',
             'fotografo'         => 'required|min:3|max:200',
             'descripcion'       => 'min:3|max:240',
