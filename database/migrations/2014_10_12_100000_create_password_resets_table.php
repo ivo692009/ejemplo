@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DescriptorPieza extends Migration
+class CreatePasswordResetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class DescriptorPieza extends Migration
      */
     public function up()
     {
-        Schema::create('descriptor_pieza', function (Blueprint $table) {
-            $table->integer('descriptor_id');
-            $table->integer('pieza_id');
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -26,6 +27,6 @@ class DescriptorPieza extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('descriptor_pieza');
+        Schema::dropIfExists('password_resets');
     }
 }

@@ -17,7 +17,7 @@
     {{ csrf_field() }}
 
         <p>Numero de registro</p> 
-        <input type="text" name="registro" id="registro" required/> <br>
+        <input type="number" name="registro" id="registro" required/> <br>
         <p>Titulo</p> 
         <input type="text" name="titulo" id="titulo" required/> <br>
         <p> Tipo de pieza </p> 
@@ -54,37 +54,42 @@
         <input type="text" name="descripcion" id="descripcion" /> <br>
         <p>Observaciones de la pieza</p> 
         <input type="text" name="observaciones" id="observaciones" /> <br>
-        <p>Descriptores</p>
+        <p><b>Descriptores</b></p>
+        <p>Descriptor Principal</p>
         <select name="descriptores_id_1" id="descriptores_id_1">
-            <option > </option>
             @foreach ($descriptores as $d)
                 <option value="{{ $d->id }}">{{ $d->nombre }}</option>
             @endforeach
         </select> <br>
+        <p>SegundoDescriptor</p>
         <select name="descriptores_id_2" id="descriptores_id_2">
             <option > </option>
             @foreach ($descriptores as $d)
                 <option value="{{ $d->id }}">{{ $d->nombre }}</option>
             @endforeach
         </select><br>
+        <p>Tercer Descriptor</p>
         <select name="descriptores_id_3" id="descriptores_id_3">
         <option > </option>
             @foreach ($descriptores as $d)
                 <option value="{{ $d->id }}">{{ $d->nombre }}</option>
             @endforeach
         </select><br>
+        <p>Cuarto Descriptor</p>
         <select name="descriptores_id_4" id="descriptores_id_4">
         <option> </option>
             @foreach ($descriptores as $d)
                 <option value="{{ $d->id }}">{{ $d->nombre }}</option>
             @endforeach
         </select><br>
+        <p>Quinto Descriptor</p>
         <select name="descriptores_id_5" id="descriptores_id_5">
             <option ></option>
             @foreach ($descriptores as $d)
                 <option value="{{ $d->id }}">{{ $d->nombre }}</option>
             @endforeach
         </select><br>
+        <p>Sexto Descriptor</p>
         <select name="descriptores_id_6" id="descriptores_id_6">
              <option> </option>
             @foreach ($descriptores as $d)
